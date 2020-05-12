@@ -13,6 +13,20 @@ https://github.com/tidwall/tile38
 ## Sunrise
 https://github.com/kelvins/sunrisesunset
 
+## UPS Monitor
+https://github.com/mdlayher/apcupsd
+https://github.com/mdlayher/apcupsd_exporter
+
+## WOL
+https://github.com/mdlayher/wol
+
+## WireGuard Exporter
+https://github.com/mdlayher/wireguard_exporter
+
+## Unifi
+https://github.com/mdlayher/unifi
+https://github.com/mdlayher/unifi_exporter
+
 ## mDNS Tool
 https://github.com/ghetzel/mdnstool
 
