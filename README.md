@@ -10,6 +10,9 @@ https://github.com/soheilhy/args
 ## Geo Location
 https://github.com/tidwall/tile38
 
+## Sunrise
+https://github.com/kelvins/sunrisesunset
+
 ## mDNS Tool
 https://github.com/ghetzel/mdnstool
 
