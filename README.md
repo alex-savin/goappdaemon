@@ -9,3 +9,6 @@ https://github.com/soheilhy/args
 
 ## Geo Location
 https://github.com/tidwall/tile38
+
+## mDNS Tool
+https://github.com/ghetzel/mdnstool
