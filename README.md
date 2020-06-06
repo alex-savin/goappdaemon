@@ -1,5 +1,8 @@
 # Go!AppDaemon
 
+![alt text](https://github.com/alex-savin/goappdaemon/blob/master/images/go-appdaemon.png?raw=true)
+
+
 ## Timer Implementation
 https://github.com/go-co-op/gocron
 
@@ -43,3 +46,5 @@ SUPPORT_CLOSE_TILT = 32
 SUPPORT_STOP_TILT = 64
 SUPPORT_SET_TILT_POSITION = 128
 ```
+
+
