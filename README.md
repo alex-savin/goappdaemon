@@ -152,115 +152,103 @@ SUPPORT_SET_TILT_POSITION = 128
 > self.parse_datetime("sunrise + 01:00:00")
 > 2019-08-16 06:33:17
 
-get_now(self)
->>> self.get_now()
-2019-08-16 21:17:41.098813+00:00
+#### get_now(self)
+> self.get_now()
+> 2019-08-16 21:17:41.098813+00:00
 
-get_now_ts(self)
->>> self.get_now_ts()
-1565990318.728324
+#### get_now_ts(self)
+> self.get_now_ts()
+> 1565990318.728324
 
-now_is_between(self, start_time, end_time, name=None)
->>> if self.now_is_between("17:30:00", "08:00:00"):
->>>     #do something
->>> if self.now_is_between("sunset - 00:45:00", "sunrise + 00:45:00"):
->>>     #do something
+#### now_is_between(self, start_time, end_time, name=None)
+> if self.now_is_between("17:30:00", "08:00:00"):
+>     #do something
+> if self.now_is_between("sunset - 00:45:00", "sunrise + 00:45:00"):
+>     #do something
 
-sunrise(self, aware=False)
->>> self.sunrise()
-2019-08-16 05:33:17
+#### sunrise(self, aware=False)
+> self.sunrise()
+> 2019-08-16 05:33:17
 
-sunset(self, aware=False)
->>> self.sunset()
-2019-08-16 19:48:48
+#### sunset(self, aware=False)
+> self.sunset()
+> 2019-08-16 19:48:48
 
-cancel_timer(self, handle)
-info_timer(self, handle)
+#### cancel_timer(self, handle)
+#### info_timer(self, handle)
 
-run_in(self, callback, delay, **kwargs)
-self.handle = self.run_in(self.run_in_c, 10)
-self.handle = self.run_in(self.run_in_c, 5, title = "run_in5")
+#### run_in(self, callback, delay, **kwargs)
+> self.handle = self.run_in(self.run_in_c, 10)
+> self.handle = self.run_in(self.run_in_c, 5, title = "run_in5")
 
-run_once(self, callback, start, **kwargs)
->>> runtime = datetime.time(16, 0, 0)
->>> handle = self.run_once(self.run_once_c, runtime)
+#### run_once(self, callback, start, **kwargs)
+> runtime = datetime.time(16, 0, 0)
+> handle = self.run_once(self.run_once_c, runtime)
+> handle = self.run_once(self.run_once_c, "10:30:00")
+> handle = self.run_once(self.run_once_c, "sunset")
+> handle = self.run_once(self.run_once_c, "sunrise + 01:00:00")
 
->>> handle = self.run_once(self.run_once_c, "10:30:00")
+#### run_at(self, callback, start, **kwargs)
+> runtime = datetime.time(16, 0, 0)
+> today = datetime.date.today()
+> event = datetime.datetime.combine(today, runtime)
+> handle = self.run_at(self.run_at_c, event)
+> handle = self.run_at(self.run_at_c, "10:30:00")
+> handle = self.run_at(self.run_at_c, "2018-12-11 10:30:00")
+> handle = self.run_at(self.run_at_c, "sunset")
+> handle = self.run_at(self.run_at_c, "sunrise + 01:00:00")
 
->>> handle = self.run_once(self.run_once_c, "sunset")
+#### run_daily(self, callback, start, **kwargs)
+> runtime = datetime.time(19, 0, 0)
+> self.run_daily(self.run_daily_c, runtime)
+> handle = self.run_daily(self.run_daily_c, "10:30:00")
+> handle = self.run_daily(self.run_daily_c, "sunrise")
+> handle = self.run_daily(self.run_daily_c, "sunset + 01:00:00")
 
->>> handle = self.run_once(self.run_once_c, "sunrise + 01:00:00")
+#### run_hourly(self, callback, start, **kwargs)
+> runtime = datetime.time(0, 0, 0)
+> self.run_hourly(self.run_hourly_c, runtime)
 
-run_at(self, callback, start, **kwargs)
->>> runtime = datetime.time(16, 0, 0)
->>> today = datetime.date.today()
->>> event = datetime.datetime.combine(today, runtime)
->>> handle = self.run_at(self.run_at_c, event)
+#### run_minutely(self, callback, start, **kwargs)
+> time = datetime.time(0, 0, 0)
+> self.run_minutely(self.run_minutely_c, time)
 
->>> handle = self.run_at(self.run_at_c, "10:30:00")
+#### run_every(self, callback, start, interval, **kwargs)
+> self.run_every(self.run_every_c, time, 17 * 60)
 
->>> handle = self.run_at(self.run_at_c, "2018-12-11 10:30:00")
+#### run_at_sunset(self, callback, **kwargs)
+> self.run_at_sunset(self.sun, offset = datetime.timedelta(minutes = -45).total_seconds())
+> self.run_at_sunset(self.sun, offset = 30 * 60)
+> self.run_at_sunset(self.sun, random_start = -60*60, random_end = 60*60)
+> self.run_at_sunset(self.sun, random_start = -60*60, random_end = 30*60)
 
->>> handle = self.run_at(self.run_at_c, "sunset")
-
->>> handle = self.run_at(self.run_at_c, "sunrise + 01:00:00")
-
-run_daily(self, callback, start, **kwargs)
->>> runtime = datetime.time(19, 0, 0)
->>> self.run_daily(self.run_daily_c, runtime)
-
->>> handle = self.run_daily(self.run_daily_c, "10:30:00")
-
->>> handle = self.run_daily(self.run_daily_c, "sunrise")
-
->>> handle = self.run_daily(self.run_daily_c, "sunset + 01:00:00")
-
-run_hourly(self, callback, start, **kwargs)
->>> runtime = datetime.time(0, 0, 0)
->>> self.run_hourly(self.run_hourly_c, runtime)
-
-run_minutely(self, callback, start, **kwargs)
-
->>> time = datetime.time(0, 0, 0)
->>> self.run_minutely(self.run_minutely_c, time)
-
-run_every(self, callback, start, interval, **kwargs)
->>> self.run_every(self.run_every_c, time, 17 * 60)
-
-run_at_sunset(self, callback, **kwargs)
->>> self.run_at_sunset(self.sun, offset = datetime.timedelta(minutes = -45).total_seconds())
->>> self.run_at_sunset(self.sun, offset = 30 * 60)
->>> self.run_at_sunset(self.sun, random_start = -60*60, random_end = 60*60)
->>> self.run_at_sunset(self.sun, random_start = -60*60, random_end = 30*60)
-
-run_at_sunrise(self, callback, **kwargs)
->>> self.run_at_sunrise(self.sun, offset = datetime.timedelta(minutes = -45).total_seconds())
->>> self.run_at_sunrise(self.sun, offset = 30 * 60)
->>> self.run_at_sunrise(self.sun, random_start = -60*60, random_end = 60*60)
->>> self.run_at_sunrise(self.sun, random_start = -60*60, random_end = 30*60)
+#### run_at_sunrise(self, callback, **kwargs)
+> self.run_at_sunrise(self.sun, offset = datetime.timedelta(minutes = -45).total_seconds())
+> self.run_at_sunrise(self.sun, offset = 30 * 60)
+> self.run_at_sunrise(self.sun, random_start = -60*60, random_end = 60*60)
+> self.run_at_sunrise(self.sun, random_start = -60*60, random_end = 30*60)
 
 
-call_service(self, service, **kwargs)
->>> self.call_service("light/turn_on", entity_id = "light.office_lamp", color_name = "red")
->>> self.call_service("notify/notify", title = "Hello", message = "Hello World")
+#### call_service(self, service, **kwargs)
+> self.call_service("light/turn_on", entity_id = "light.office_lamp", color_name = "red")
+> self.call_service("notify/notify", title = "Hello", message = "Hello World")
 
-run_sequence(self, sequence, **kwargs)
-handle = self.run_sequence("sequence.front_room_scene")
->>> handle = self.run_sequence([{"light.turn_on": {"entity_id": "light.office_1"}}, {"sleep": 5}, {"light.turn_off":
-{"entity_id": "light.office_1"}}])
+#### run_sequence(self, sequence, **kwargs)
+> handle = self.run_sequence("sequence.front_room_scene")
+> handle = self.run_sequence([{"light.turn_on": {"entity_id": "light.office_1"}}, {"sleep": 5}, {"light.turn_off": {"entity_id": "light.office_1"}}])
 
-cancel_sequence(self, handle)
+#### cancel_sequence(self, handle)
 
-listen_event(self, callback, event=None, **kwargs)
->>> self.listen_event(self.mode_event, "MODE_CHANGE")
->>> self.listen_event(self.generic_event, "zwave.scene_activated", scene_id = 3)
->>> self.listen_event(self.generic_event, "zwave.scene_activated", entity_id = "minimote_31", scene_id = 3)
+#### listen_event(self, callback, event=None, **kwargs)
+> self.listen_event(self.mode_event, "MODE_CHANGE")
+> self.listen_event(self.generic_event, "zwave.scene_activated", scene_id = 3)
+> self.listen_event(self.generic_event, "zwave.scene_activated", entity_id = "minimote_31", scene_id = 3)
 
-cancel_listen_event(self, handle)
->>> self.cancel_listen_event(handle)
+#### cancel_listen_event(self, handle)
+> self.cancel_listen_event(handle)
 
-info_listen_event(self, handle)
->>> service, kwargs = self.info_listen_event(handle)
+#### info_listen_event(self, handle)
+> service, kwargs = self.info_listen_event(handle)
 
-fire_event(self, event, **kwargs)
->>> self.fire_event("MY_CUSTOM_EVENT", jam="true")
+#### fire_event(self, event, **kwargs)
+> self.fire_event("MY_CUSTOM_EVENT", jam="true")
