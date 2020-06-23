@@ -49,112 +49,108 @@ SUPPORT_SET_TILT_POSITION = 128
 
 ## Features
 
-turn_on(self, entity_id, **kwargs)
-self.turn_on("switch.backyard_lights")
-self.turn_on("scene.bedroom_on")
-self.turn_on("light.office_1", color_name = "green")
+#### turn_on(self, entity_id, **kwargs)
+> self.turn_on("switch.backyard_lights")
+> self.turn_on("scene.bedroom_on")
+> self.turn_on("light.office_1", color_name = "green")
 
-turn_off(self, entity_id, **kwargs)
-self.turn_off("switch.backyard_lights")
-self.turn_off("scene.bedroom_on")
+#### turn_off(self, entity_id, **kwargs)
+> self.turn_off("switch.backyard_lights")
+> self.turn_off("scene.bedroom_on")
 
-toggle(self, entity_id, **kwargs)
-self.toggle("switch.backyard_lights")
-self.toggle("light.office_1", color_name = "green")
+#### toggle(self, entity_id, **kwargs)
+> self.toggle("switch.backyard_lights")
+> self.toggle("light.office_1", color_name = "green")
 
-set_value(self, entity_id, value, **kwargs)
-self.set_value("input_number.alarm_hour", 6)
+#### set_value(self, entity_id, value, **kwargs)
+> self.set_value("input_number.alarm_hour", 6)
 
-set_textvalue(self, entity_id, value, **kwargs)
-self.set_textvalue("input_text.text1", "hello world")
+#### set_textvalue(self, entity_id, value, **kwargs)
+> self.set_textvalue("input_text.text1", "hello world")
 
-select_option(self, entity_id, option, **kwargs)
-self.select_option("input_select.mode", "Day")
+#### select_option(self, entity_id, option, **kwargs)
+> self.select_option("input_select.mode", "Day")
 
-notify(self, message, **kwargs)
-self.notify("Switching mode to Evening")
-self.notify("Switching mode to Evening", title = "Some Subject", name = "smtp")
+#### notify(self, message, **kwargs)
+> self.notify("Switching mode to Evening")
+> self.notify("Switching mode to Evening", title = "Some Subject", name = "smtp")
 
-render_template(self, template, **kwargs)
-self.render_template("{{ states('sun.sun') }}")
-Returns (str) above_horizon
+#### render_template(self, template, **kwargs)
+> self.render_template("{{ states('sun.sun') }}")
+> Returns (str) above_horizon
+> self.render_template("{{ is_state('sun.sun', 'above_horizon') }}")
+> Returns (bool) True
+> self.render_template("{{ states('sensor.outside_temp') }}")
+> Returns (float) 97.2
 
-self.render_template("{{ is_state('sun.sun', 'above_horizon') }}")
-Returns (bool) True
+#### get_trackers(self, **kwargs)
+#### get_tracker_details(self, **kwargs)
+#### get_tracker_state(self, entity_id, **kwargs)
 
-self.render_template("{{ states('sensor.outside_temp') }}")
-Returns (float) 97.2
+#### anyone_home(self, **kwargs)
+#### everyone_home(self, **kwargs)
+#### noone_home(self, **kwargs)
 
-get_trackers(self, **kwargs)
-get_tracker_details(self, **kwargs)
-get_tracker_state(self, entity_id, **kwargs)
+#### get_state(self, entity_id=None, attribute=None, default=None, copy=True, **kwargs)
+> state = self.get_state()
+> state = self.get_state("switch")
+> state = self.get_state("light.office_1")
+> state = self.get_state("light.office_1", attribute="brightness")
+> state = self.get_state("light.office_1", attribute="all")
 
-anyone_home(self, **kwargs)
-everyone_home(self, **kwargs)
-noone_home(self, **kwargs)
+#### set_state(self, entity_id, **kwargs)
+> self.set_state("light.office_1", state="off")
+> self.set_state("light.office_1", state = "on", attributes = {"color_name": "red"})
+> self.set_state("light.office_1", state="off", namespace ="hass")
 
+#### listen_state(self, callback, entity=None, **kwargs)
+> self.handle = self.listen_state(self.my_callback)
+> self.handle = self.listen_state(self.my_callback, "light")
+> self.handle = self.listen_state(self.my_callback, "light.office_1")
+> self.handle = self.listen_state(self.my_callback, "light.office_1", attribute = "all")
+> self.handle = self.listen_state(self.my_callback, "light.office_1", attribute = "brightness")
+> self.handle = self.listen_state(self.my_callback, "light.office_1", new = "on")
+> self.handle = self.listen_state(self.my_callback, "light.office_1", attribute = "brightness", old = "100", new = "200")
+> self.handle = self.listen_state(self.my_callback, "light.office_1", new = "on", duration = 60)
+> self.handle = self.listen_state(self.my_callback, "light.office_1", new = "on", duration = 60, immediate = True)
 
+#### cancel_listen_state(self, handle)
+> self.cancel_listen_state(self.office_light_handle)
 
-get_state(self, entity_id=None, attribute=None, default=None, copy=True, **kwargs)
-state = self.get_state()
-state = self.get_state("switch")
-state = self.get_state("light.office_1")
-state = self.get_state("light.office_1", attribute="brightness")
-tate = self.get_state("light.office_1", attribute="all")
+#### info_listen_state(self, handle)
+> entity, attribute, kwargs = self.info_listen_state(self.handle)
 
-set_state(self, entity_id, **kwargs)
-self.set_state("light.office_1", state="off")
-self.set_state("light.office_1", state = "on", attributes = {"color_name": "red"})
-self.set_state("light.office_1", state="off", namespace ="hass")
+#### parse_utc_string(self, utc_string)
 
-listen_state(self, callback, entity=None, **kwargs)
-self.handle = self.listen_state(self.my_callback)
-self.handle = self.listen_state(self.my_callback, "light")
-self.handle = self.listen_state(self.my_callback, "light.office_1")
-self.handle = self.listen_state(self.my_callback, "light.office_1", attribute = "all")
-self.handle = self.listen_state(self.my_callback, "light.office_1", attribute = "brightness")
-self.handle = self.listen_state(self.my_callback, "light.office_1", new = "on")
-self.handle = self.listen_state(self.my_callback, "light.office_1", attribute = "brightness", old = "100", new = "200")
-self.handle = self.listen_state(self.my_callback, "light.office_1", new = "on", duration = 60)
-self.handle = self.listen_state(self.my_callback, "light.office_1", new = "on", duration = 60, immediate = True)
+#### get_tz_offset()
 
-cancel_listen_state(self, handle)
-self.cancel_listen_state(self.office_light_handle)
+#### convert_utc(utc)
 
-info_listen_state(self, handle)
-entity, attribute, kwargs = self.info_listen_state(self.handle)
+#### sun_up(self)
 
-parse_utc_string(self, utc_string)
+#### sun_down(self)
 
-get_tz_offset()
+#### parse_time(self, time_str, name=None, aware=False)
+> self.parse_time("17:30:00")
+> 17:30:00
+> time = self.parse_time("sunrise")
+> 04:33:17
+> time = self.parse_time("sunset + 00:30:00")
+> 19:18:48
+> time = self.parse_time("sunrise + 01:00:00")
+> 05:33:17
 
-convert_utc(utc)
-
-sun_up(self)
-
-sun_down(self)
-
-parse_time(self, time_str, name=None, aware=False)
->>> self.parse_time("17:30:00")
-17:30:00
->>> time = self.parse_time("sunrise")
-04:33:17
->>> time = self.parse_time("sunset + 00:30:00")
-19:18:48
->>> time = self.parse_time("sunrise + 01:00:00")
-05:33:17
-
-parse_datetime(self, time_str, name=None, aware=False)
->>> self.parse_datetime("2018-08-09 17:30:00")
-2018-08-09 17:30:00
->>> self.parse_datetime("17:30:00")
-2019-08-15 17:30:00
->>> self.parse_datetime("sunrise")
-2019-08-16 05:33:17
->>> self.parse_datetime("sunset + 00:30:00")
-2019-08-16 19:18:48
->>> self.parse_datetime("sunrise + 01:00:00")
-2019-08-16 06:33:17
+#### parse_datetime(self, time_str, name=None, aware=False)
+> self.parse_datetime("2018-08-09 17:30:00")
+> 2018-08-09 17:30:00
+> self.parse_datetime("17:30:00")
+> 2019-08-15 17:30:00
+> self.parse_datetime("sunrise")
+> 2019-08-16 05:33:17
+> self.parse_datetime("sunset + 00:30:00")
+> 2019-08-16 19:18:48
+> self.parse_datetime("sunrise + 01:00:00")
+> 2019-08-16 06:33:17
 
 get_now(self)
 >>> self.get_now()
